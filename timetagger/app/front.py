@@ -1097,34 +1097,34 @@ class TopWidget(Widget):
         )
         x += margin
 
-        x += self._draw_button(
-            ctx,
-            x,
-            y3,
-            None,
-            h,
-            ["fas-\uf05a"],
-            "guide",
-            "Show guide [i]",
-            {"ref": "topleft"},
-        )
+        # x += self._draw_button(
+        #     ctx,
+        #     x,
+        #     y3,
+        #     None,
+        #     h,
+        #     ["fas-\uf05a"],
+        #     "guide",
+        #     "Show guide [i]",
+        #     {"ref": "topleft"},
+        # )
 
-        if (
-            dt.time_since_app_loaded() > 4
-            and window.store.records.put_count < 5
-            and not self._canvas.guide_dialog.initialized
-        ):
+        # if (
+        #     dt.time_since_app_loaded() > 4
+        #     and window.store.records.put_count < 5
+        #     and not self._canvas.guide_dialog.initialized
+        # ):
             # Help new users find the guide
-            y_balloon = y3 + h / 2
-            ctx.strokeStyle = COLORS.acc_clr
-            ctx.lineWidth = 3
-            ctx.beginPath()
-            ctx.moveTo(x + 5, y_balloon)
-            ctx.lineTo(x + 35, y_balloon)
-            ctx.stroke()
-            text = "Handy guide!"
-            options = {"ref": "middleleft", "color": "#000", "body": COLORS.acc_clr}
-            self._draw_button(ctx, x + 30, y_balloon, None, 30, text, "", "", options)
+            # y_balloon = y3 + h / 2
+            # ctx.strokeStyle = COLORS.acc_clr
+            # ctx.lineWidth = 3
+            # ctx.beginPath()
+            # ctx.moveTo(x + 5, y_balloon)
+            # ctx.lineTo(x + 35, y_balloon)
+            # ctx.stroke()
+            # text = "Handy guide!"
+            # options = {"ref": "middleleft", "color": "#000", "body": COLORS.acc_clr}
+            # self._draw_button(ctx, x + 30, y_balloon, None, 30, text, "", "", options)
 
     def _draw_menu_button(self, ctx, x1, y1, x2, y2):
         if window.store.__name__.startswith("Demo"):
@@ -1280,79 +1280,79 @@ class TopWidget(Widget):
         self._update_favicon(has_running)
 
         # Start & stop button
-        if has_running:
-            dx = self._draw_button(
-                ctx,
-                x,
-                y,
-                h,
-                h,
-                "fas-\uf04d",
-                "record_stopall",
-                stop_tt,
-                {
-                    "ref": "topright",
-                    "font": FONT.condensed,
-                    "color": running_tag_color if running_tag_color else COLORS.acc_clr,
-                },
-            )
-            x -= dx + 3
-            dx = self._draw_button(
-                ctx,
-                x,
-                y,
-                h,
-                h,
-                "fas-\uf04b",
-                "record_start",
-                start_tt,
-                {"ref": "topright", "font": FONT.condensed},
-            )
-            x -= dx
-        else:
-            # This but takes more space, but there it no stop but. So no reason
-            # to reduce size when avail_width is low.
-            dx = self._draw_button(
-                ctx,
-                x,
-                y,
-                None,
-                h,
-                ["fas-\uf04b", "Record"],
-                "record_start",
-                start_tt,
-                {"ref": "topright", "font": FONT.condensed},
-            )
-            x -= dx
+        # if has_running:
+        #     dx = self._draw_button(
+        #         ctx,
+        #         x,
+        #         y,
+        #         h,
+        #         h,
+        #         "fas-\uf04d",
+        #         "record_stopall",
+        #         stop_tt,
+        #         {
+        #             "ref": "topright",
+        #             "font": FONT.condensed,
+        #             "color": running_tag_color if running_tag_color else COLORS.acc_clr,
+        #         },
+        #     )
+        #     x -= dx + 3
+        #     dx = self._draw_button(
+        #         ctx,
+        #         x,
+        #         y,
+        #         h,
+        #         h,
+        #         "fas-\uf04b",
+        #         "record_start",
+        #         start_tt,
+        #         {"ref": "topright", "font": FONT.condensed},
+        #     )
+        #     x -= dx
+        # else:
+        #     # This but takes more space, but there it no stop but. So no reason
+        #     # to reduce size when avail_width is low.
+        #     dx = self._draw_button(
+        #         ctx,
+        #         x,
+        #         y,
+        #         None,
+        #         h,
+        #         ["fas-\uf04b", "Record"],
+        #         "record_start",
+        #         start_tt,
+        #         {"ref": "topright", "font": FONT.condensed},
+        #     )
+        #     x -= dx
 
-            if dt.time_since_app_loaded() > 3 and window.store.records.put_count == 0:
-                # Help new users find the record button (can test this in the sandbox)
-                x_balloon = x + 0.5 * dx
-                ctx.strokeStyle = COLORS.acc_clr
-                ctx.lineWidth = 3
-                ctx.beginPath()
-                ctx.moveTo(x_balloon, y + 40)
-                ctx.lineTo(x_balloon, y + 80)
-                ctx.stroke()
-                text = "Press to start tracking time!"
-                options = {"ref": "topleft", "color": "#000", "body": COLORS.acc_clr}
-                self._draw_button(ctx, x, y + 70, None, 30, text, "", "", options)
+        #     if dt.time_since_app_loaded() > 3 and window.store.records.put_count == 0:
+        #         # Help new users find the record button (can test this in the sandbox)
+        #         x_balloon = x + 0.5 * dx
+        #         ctx.strokeStyle = COLORS.acc_clr
+        #         ctx.lineWidth = 3
+        #         ctx.beginPath()
+        #         ctx.moveTo(x_balloon, y + 40)
+        #         ctx.lineTo(x_balloon, y + 80)
+        #         ctx.stroke()
+        #         text = "Press to start tracking time!"
+        #         options = {"ref": "topleft", "color": "#000", "body": COLORS.acc_clr}
+        #         self._draw_button(ctx, x, y + 70, None, 30, text, "", "", options)
 
         # Pomodoro button
-        if window.simplesettings.get("pomodoro_enabled"):
-            x -= 3
-            dx = self._draw_button(
-                ctx,
-                x,
-                y,
-                None,
-                h,
-                "fas-\uf2f2",
-                "pomo",
-                "Show Pomodoro dialog",
-                {"ref": "topright", "font": FONT.condensed},
-            )
-            x -= dx
+        # if window.simplesettings.get("pomodoro_enabled"):
+        #     x -= 3
+        #     dx = self._draw_button(
+        #         ctx,
+        #         x,
+        #         y,
+        #         None,
+        #         h,
+        #         "fas-\uf2f2",
+        #         "pomo",
+        #         "Show Pomodoro dialog",
+        #         {"ref": "topright", "font": FONT.condensed},
+        #     )
+        #     x -= dx
 
         # Draw summary text
         ctx.textBaseline = "top"
@@ -1489,13 +1489,13 @@ class TopWidget(Widget):
         elif e.key.lower() == "t":
             self._handle_button_press("nav_menu")
         #
-        elif e.key.lower() == "s":
-            if e.shiftKey:
-                self._handle_button_press("record_resume")
-            else:
-                self._handle_button_press("record_start")
-        elif e.key.lower() == "x":
-            self._handle_button_press("record_stopall")
+        # elif e.key.lower() == "s":
+        #     if e.shiftKey:
+        #         self._handle_button_press("record_resume")
+        #     else:
+        #         self._handle_button_press("record_start")
+        # elif e.key.lower() == "x":
+        #     self._handle_button_press("record_stopall")
         elif e.key.lower() == "r":
             self._handle_button_press("report")
         elif e.key.lower() == "i":
